@@ -9,3 +9,10 @@ To render a tetrahedron in Python, we can use a 3D graphics library such as matp
 
 | astro-stacker.py |
 Python script using the astropy package to stack your images. This script assumes that all the images are in the same directory and are named image1.fits, image2.fits, and so on up to image10000.fits. You may need to modify the script to match your file naming convention. The script first loads the header and WCS information from the first image in the set to ensure that all the images are aligned correctly. It then calculates the median of the data values for each pixel across all the images, which effectively reduces the noise in the final image. It uses sigma_clipped_stats from astropy.stats to calculate the standard deviation and mean of the data values for each pixel. It then creates a Cutout2D object centered on the astronomical object and saves it to a new FITS file, along with some header information about the stack. Note that the size of the Cutout2D object is set to 100 pixels in this example, but you may need to adjust this value based on the size of your object and the resolution of your images.
+
+| remote-outpost-uploader.py | Python script that monitors for new files in a specified directory, adds them to a queue for uploading to a remote SSH server (either via username and password or via ssh-key), and can handle network interruptions and bandwidth limiting. It uses the Paramiko library for SSH and the Watchdog library for monitoring file system events.
+
+To use SSH key authentication, save the private key file to the same directory as the script and execute the following command in a terminal:
+python remote-outpost-uploader.py /path/to/directory --key private_key.pem --limit 100
+Replace /path/to/directory with the path to the directory you want to monitor for new files, and --limit with the desired bandwidth limit in kbps (optional).
+
